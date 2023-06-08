@@ -15,10 +15,10 @@ function App() {
     <div className="App">
       <div className='app-layout'>
         <ContentArea>
-        <input type="text" id="twotabsearchtextbox" value="" name="field-keywords" autocomplete="off" placeholder="Search" class="nav-input nav-progressive-attribute" dir="auto" tabindex="0" aria-label="Search Amazon" spellcheck="false"></input>
-        <button>Amazon</button>
-        <button>FlipKart</button>
-        <button>Snapdeal</button>
+        <input type="text" id="twotabsearchtextbox" value="shelves" name="field-keywords" autocomplete="off" placeholder="Search" class="nav-input nav-progressive-attribute" dir="auto" tabindex="0" aria-label="Search Amazon" spellcheck="false"></input>
+        <button onChange={<SpotlightListings data={megaSale}/>}>Amazon</button>
+        <button onChange={<SpotlightListings data={megaSale}/>}>Flipkart</button>
+        <button onChange={<SpotlightListings data={megaSale}/>}>Snapdeal</button>
           <SpotlightListings data={megaSale}/>
         </ContentArea>
       </div>
