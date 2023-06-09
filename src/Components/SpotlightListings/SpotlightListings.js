@@ -1,4 +1,5 @@
 
+import { Button, Paper } from "@mui/material";
 import React from "react";
 
 
@@ -10,25 +11,31 @@ export default function SpotlightListings({data=[]}){
        
         {data.map((d,i)=>(
             <div className="game-card"> 
-            <img src={d.image}/>
             <div className="game-content">
-                <h4 className="gameName">{d.title}</h4>
-                <div className="pricing">
-                <p className="sellingPrice">{d.price}</p>
-                <p className="reviews">{d.reviews}</p>
-                <p className="stars">{d.stars}</p>
+             <Paper className="game-details">
+                     <p><img src={d.image}/></p>
+                     <p>title : {d.title}</p>
+                     <p>Price : {d.price}</p>
+                     <p>reviews : {d.reviews}</p>
+                     <p>stars : {d.stars}</p>
+                     <Button variant="contained" href={d.link}>
+                      Link
+                    </Button>
+                   </Paper>
+                   </div>
+                
                 </div>
-                <button>Click</button>
-                </div>
-                </div>
+              
                 )
             )
-
         }
         </div>
-        </div>  
+        </div>
+}
+       
+       
+      
         
  
-}
 
   

@@ -2,9 +2,12 @@ import React,{useEffect,useState} from 'react';
 import './App.css';
 import ContentArea from './Components/ContentArea';
 import SpotlightListings from './Components/SpotlightListings/SpotlightListings';
+import { Button, TextField } from '@mui/material';
+
 
 function App() {
   const [megaSale,setMegaSale]=useState([]);
+  const [search, setSearch] = useState("");
   useEffect(()=>{
     fetch("./mocks/product.json")
     .then((response)=>response.json())
@@ -15,10 +18,15 @@ function App() {
     <div className="App">
       <div className='app-layout'>
         <ContentArea>
-        <input type="text" id="twotabsearchtextbox" value="shelves" name="field-keywords" autocomplete="off" placeholder="Search" class="nav-input nav-progressive-attribute" dir="auto" tabindex="0" aria-label="Search Amazon" spellcheck="false"></input>
-        <button onChange={<SpotlightListings data={megaSale}/>}>Amazon</button>
-        <button onChange={<SpotlightListings data={megaSale}/>}>Flipkart</button>
-        <button onChange={<SpotlightListings data={megaSale}/>}>Snapdeal</button>
+        <TextField label="search" variant="outlined" fullWidth sx={{ m: 1 }}
+        placeholder="Search"
+        value={search}
+        onChange={(e)=>setSearch(e.target.value)}
+        type="search"
+        />
+        <Button variant="contained" href={<SpotlightListings data={megaSale}/>}>Amazon</Button>
+        <Button variant="contained" href={<SpotlightListings data={megaSale}/>}>Flipkart</Button>
+        <Button variant="contained" href={<SpotlightListings data={megaSale}/>}>Snapdeal</Button>
           <SpotlightListings data={megaSale}/>
         </ContentArea>
       </div>
