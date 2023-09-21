@@ -1,35 +1,47 @@
-import React,{useEffect,useState} from 'react';
+import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import ContentArea from './Components/ContentArea';
-import SpotlightListings from './Components/SpotlightListings/SpotlightListings';
-import { Button, TextField } from '@mui/material';
-
+import Dashboard from './Components/Dashboard';
+import LoginPage from './Components/LoginPage';
+import SignupPage from './Components/SignupPage';
 
 function App() {
-  const [megaSale,setMegaSale]=useState([]);
-  const [search, setSearch] = useState("");
+  const [products,setProducts] = useState([]);
+
+  // Fetch priduct from my-API
   useEffect(()=>{
-    fetch("./mocks/product.json")
-    .then((response)=>response.json())
-    .then((result)=>setMegaSale(result.data));
-    return ()=>{};
-  },[])
+    async function getProducts(){ 
+      const response = await fetch("https://backend-ec78.vercel.app/products/all",
+      {method:'GET',
+      headers:{
+        "x-auth-token":localStorage.getItem("token")
+      }
+    })
+      const data = await response.json();
+      setProducts(data.data)
+  
+      //console.log(products)
+    }
+    getProducts();
+  },[]);
   return (
     <div className="App">
-      <div className='app-layout'>
-        <ContentArea>
-        <TextField label="search" variant="outlined" fullWidth sx={{ m: 1 }}
-        placeholder="Search"
-        value={search}
-        onChange={(e)=>setSearch(e.target.value)}
-        type="search"
+      <Routes>
+
+        <Route exact path="/"
+          element={<Dashboard
+          products={products}
+          setProducts={setProducts}
+          />} />
+
+        <Route path="/login"
+          element={<LoginPage />}
         />
-        <Button variant="contained" href={<SpotlightListings data={megaSale}/>}>Amazon</Button>
-        <Button variant="contained" href={<SpotlightListings data={megaSale}/>}>Flipkart</Button>
-        <Button variant="contained" href={<SpotlightListings data={megaSale}/>}>Snapdeal</Button>
-          <SpotlightListings data={megaSale}/>
-        </ContentArea>
-      </div>
+
+        <Route path="/signup"
+          element={<SignupPage />}
+        />
+      </Routes>
     </div>
   );
 }
