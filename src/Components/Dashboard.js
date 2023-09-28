@@ -1,17 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button, Paper } from '@mui/material';
 import Base from '../Base/Base';
-import { useNavigate } from 'react-router-dom';
 
 function Dashboard({products,setProducts}){
-  const navigate = useNavigate()
-  useEffect(()=>{
-    if(!localStorage.getItem("token")){
-       navigate("/login", {replace:true})
-    }
-   })
-   
    return(
       <Base>
       <div className="spotlight-listings-container">
